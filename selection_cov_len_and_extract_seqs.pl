@@ -59,7 +59,7 @@ open IN3, 'len_temp';
 while(<IN3>){
 @len = split("\t");
 if($len[1] >= 400){
-print OUT4 "$len[0]\n"}
+print OUT4 "$len[0]\n";}
 }
 close IN3;
 close OUT4;
