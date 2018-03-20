@@ -1,0 +1,41 @@
+#!/usr/local/bin/perl -w 
+
+=pod
+-----潘博 Bryan Pan-----
+-----bopan2016@163.com-----
+-----March 20th 2018-----
+=cut
+use strict;
+use Getopt::Long;
+my ($infile,$outfile,$help,$count,$pep);
+GetOptions(
+        "i|input=s"=>\$infile,
+        "o|out=s"=>\$outfile,
+        "h|help:s"=>\$help,
+);
+($infile && -s $infile)||$help||die & Usage();
+
+open IN, $infile;
+open OUT, ">$outfile";
+$/ = "###";
+$count = 1;
+
+while (<IN>) {
+	chomp;
+	s/#//g;
+	s/ //g;
+	s/\n//g;
+	
+	if ($_ =~ /proteinsequence=\[(.*)\]/)
+			  
+	 {
+		$pep = $1;
+		
+		print OUT ">$count\n$pep\n";
+
+		$count++;
+		}
+	}
+$/ = "\n";
+close IN;
+close OUT;
